@@ -1,0 +1,73 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+  <defs>
+    <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7dd3fc;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#38bdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle (subtle) -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#1a5f7a" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Outer lens rings -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="url(#lensGradient)" stroke-width="2" opacity="0.7"/>
+  <circle cx="100" cy="100" r="70" fill="none" stroke="url(#lensGradient)" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="100" cy="100" r="55" fill="none" stroke="url(#lensGradient)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Central lens (main focus) -->
+  <circle cx="100" cy="100" r="45" fill="none" stroke="url(#lensGradient)" stroke-width="2.5" filter="url(#glow)"/>
+
+  <!-- Circuit board pattern paths -->
+  <!-- Top-right circuit -->
+  <path d="M 120 75 L 140 75 L 140 95 L 160 95" fill="none" stroke="url(#lensGradient)" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="140" cy="75" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="140" cy="95" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="160" cy="95" r="2.5" fill="#7dd3fc" filter="url(#strongGlow)"/>
+
+  <!-- Top-left circuit -->
+  <path d="M 80 75 L 60 75 L 60 95 L 40 95" fill="none" stroke="url(#lensGradient)" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="60" cy="75" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="60" cy="95" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="40" cy="95" r="2.5" fill="#22d3ee" filter="url(#strongGlow)"/>
+
+  <!-- Bottom-right circuit -->
+  <path d="M 125 130 L 145 130 L 145 155 L 165 155" fill="none" stroke="url(#lensGradient)" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="145" cy="130" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="145" cy="155" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="165" cy="155" r="2.5" fill="#7dd3fc" filter="url(#strongGlow)"/>
+
+  <!-- Bottom-left circuit -->
+  <path d="M 75 130 L 55 130 L 55 155 L 35 155" fill="none" stroke="url(#lensGradient)" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="55" cy="130" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="55" cy="155" r="2" fill="#38bdf8" filter="url(#strongGlow)"/>
+  <circle cx="35" cy="155" r="2.5" fill="#22d3ee" filter="url(#strongGlow)"/>
+
+  <!-- Center AI core node -->
+  <circle cx="100" cy="100" r="8" fill="url(#lensGradient)" filter="url(#strongGlow)" opacity="0.9"/>
+  <circle cx="100" cy="100" r="4" fill="#ffffff" opacity="0.6"/>
+
+  <!-- Center sparkle accent -->
+  <g opacity="0.8">
+    <line x1="95" y1="95" x2="105" y2="105" stroke="#ffffff" stroke-width="1"/>
+    <line x1="105" y1="95" x2="95" y2="105" stroke="#ffffff" stroke-width="1"/>
+  </g>
+
+  <!-- Subtle inner grid for circuit feel -->
+  <path d="M 85 100 Q 100 90 115 100" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.3"/>
+  <path d="M 85 100 Q 100 110 115 100" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.3"/>
+</svg>

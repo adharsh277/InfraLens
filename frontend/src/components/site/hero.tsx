@@ -38,10 +38,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden px-4 pt-20 pb-20 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-[-20%] left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-sky-400/20 blur-[130px]" />
-        <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-cyan-400/20 blur-[120px]" />
-      </div>
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2">
         <motion.div
           className="space-y-7"
@@ -50,9 +46,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.div
-            className="inline-flex items-center rounded-full border border-sky-200/35 bg-sky-300/10 px-3 py-1 text-xs font-medium text-sky-100 backdrop-blur-xl"
-            animate={{ boxShadow: ["0 0 0 rgba(34,211,238,0)", "0 0 28px rgba(34,211,238,0.22)", "0 0 0 rgba(34,211,238,0)"] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-xl"
           >
             AI-Powered DevOps Clarity
           </motion.div>
@@ -63,9 +57,9 @@ export function Hero() {
             Turn complex Terraform and Kubernetes repos into clear visual systems
             powered by AI.
           </p>
-          <div className="rounded-2xl border border-cyan-200/15 bg-[#0a1121]/80 p-3 shadow-[0_12px_40px_rgba(2,6,23,0.65)] backdrop-blur-2xl">
+          <div className="rounded-2xl border border-white/15 bg-[#0a1121]/80 p-3 backdrop-blur-2xl">
             <div className="flex flex-col gap-3 sm:flex-row">
-              <div className="group flex flex-1 items-center gap-2 rounded-xl border border-white/8 bg-[#050b18] px-3 transition-all duration-300 focus-within:border-cyan-300/60 focus-within:shadow-[0_0_22px_rgba(34,211,238,0.24)]">
+              <div className="group flex flex-1 items-center gap-2 rounded-xl border border-white/8 bg-[#050b18] px-3 transition-all duration-300 focus-within:border-white/30">
                 <GitBranch className="h-4 w-4 text-slate-400" />
                 <input
                   aria-label="GitHub repository URL"
@@ -75,7 +69,7 @@ export function Hero() {
                 />
               </div>
               <Link href="/analyze">
-                <Button className="w-full animate-[pulseGlow_2.8s_ease-in-out_infinite] sm:w-auto">
+                <Button className="w-full sm:w-auto">
                   Analyze Repo
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -85,12 +79,12 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="relative h-[390px] rounded-3xl border border-cyan-200/18 bg-[#0a1222]/86 p-6 shadow-[0_20px_70px_rgba(14,165,233,0.18)] backdrop-blur-2xl"
+          className="relative h-[390px] rounded-3xl border border-white/15 bg-[#0a1222]/86 p-6 backdrop-blur-2xl"
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.18 }}
         >
-          <div className="absolute inset-4 rounded-2xl border border-cyan-200/10 bg-[#080f1e]/95" />
+          <div className="absolute inset-4 rounded-2xl border border-white/8 bg-[#080f1e]/95" />
           <div className="relative h-full w-full">
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 360 300">
               <defs>
@@ -132,16 +126,12 @@ export function Hero() {
                 type="button"
                 onHoverStart={() => setHoveredNode(node.label)}
                 onHoverEnd={() => setHoveredNode(null)}
-                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-lg border border-cyan-200/45 bg-cyan-300/15 px-3 py-1 text-xs font-medium text-cyan-100 shadow-[0_0_28px_rgba(34,211,238,0.44)] backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-cyan-200 hover:shadow-[0_0_36px_rgba(56,189,248,0.65)]"
+                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-lg border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-white/50"
                 style={{ left: `${node.x}%`, top: `${node.y}%` }}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{
                   opacity: 1,
                   y: [0, -4, 0],
-                  boxShadow:
-                    hoveredNode === node.label
-                      ? "0 0 38px rgba(34,211,238,0.8)"
-                      : "0 0 24px rgba(34,211,238,0.42)",
                 }}
                 transition={{
                   opacity: { duration: 0.38, delay: index * 0.07 },
@@ -149,11 +139,6 @@ export function Hero() {
                 }}
               >
                 {node.label}
-                <motion.span
-                  className="pointer-events-none absolute inset-0 rounded-lg border border-cyan-100/40"
-                  animate={{ opacity: [0.16, 0.55, 0.16], scale: [1, 1.06, 1] }}
-                  transition={{ duration: 2.4 + index * 0.3, repeat: Infinity, ease: "easeInOut" }}
-                />
               </motion.button>
             ))}
           </div>

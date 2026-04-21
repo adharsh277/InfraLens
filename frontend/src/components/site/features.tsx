@@ -51,7 +51,7 @@ export function Features() {
             return (
               <motion.article
                 key={card.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:shadow-[0_0_40px_rgba(34,211,238,0.22)]"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1"
                 variants={{
                   hidden: { opacity: 0, y: 18 },
                   visible: { opacity: 1, y: 0 },
@@ -59,13 +59,11 @@ export function Features() {
                 transition={{ duration: 0.45, ease: "easeOut" }}
                 whileHover={{ y: -7 }}
               >
-                <motion.span
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-200/30 bg-cyan-300/10 text-cyan-200"
-                  animate={{ boxShadow: ["0 0 0 rgba(34,211,238,0)", "0 0 20px rgba(34,211,238,0.26)", "0 0 0 rgba(34,211,238,0)"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                <span
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white"
                 >
                   <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                </motion.span>
+                </span>
                 <h3 className="mt-4 text-lg font-semibold text-white">{card.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{card.description}</p>
               </motion.article>

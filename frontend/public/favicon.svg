@@ -1,0 +1,37 @@
+<svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7dd3fc;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#38bdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:1" />
+    </linearGradient>
+    <filter id="faviconGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="192" height="192" fill="#000000"/>
+  
+  <!-- Outer lens rings -->
+  <circle cx="96" cy="96" r="76" fill="none" stroke="url(#faviconGradient)" stroke-width="2.5"/>
+  <circle cx="96" cy="96" r="56" fill="none" stroke="url(#faviconGradient)" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Central lens -->
+  <circle cx="96" cy="96" r="40" fill="none" stroke="url(#faviconGradient)" stroke-width="2" filter="url(#faviconGlow)"/>
+  
+  <!-- Circuit nodes -->
+  <circle cx="135" cy="68" r="3.5" fill="#38bdf8" filter="url(#faviconGlow)"/>
+  <path d="M 108 68 L 135 68" fill="none" stroke="url(#faviconGradient)" stroke-width="1.5" opacity="0.7"/>
+  
+  <circle cx="57" cy="68" r="3.5" fill="#22d3ee" filter="url(#faviconGlow)"/>
+  <path d="M 84 68 L 57 68" fill="none" stroke="url(#faviconGradient)" stroke-width="1.5" opacity="0.7"/>
+  
+  <!-- Center core -->
+  <circle cx="96" cy="96" r="7" fill="url(#faviconGradient)" filter="url(#faviconGlow)"/>
+  <circle cx="96" cy="96" r="3" fill="#ffffff" opacity="0.7"/>
+</svg>

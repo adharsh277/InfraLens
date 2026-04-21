@@ -23,7 +23,7 @@ export function Workflow() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
-              whileHover={{ y: -5, boxShadow: "0 0 24px rgba(34,211,238,0.22)" }}
+              whileHover={{ y: -5 }}
             >
               <span className="text-xs text-cyan-300">Step {index + 1}</span>
               <p className="mt-2 text-sm font-medium text-white">{step}</p>

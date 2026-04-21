@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "InfraLens | AI Infrastructure Intelligence",
   description:
     "Understand Terraform and Kubernetes architecture instantly with AI-powered graph visualization.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${sora.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#0b0f1a] text-white">{children}</body>
+      <body className="min-h-full bg-[#000000] text-white">{children}</body>
     </html>
   );
 }

@@ -9,7 +9,7 @@ const infraNodes = [
 export function LivePreview() {
   return (
     <section className="px-4 py-16 sm:px-6 lg:px-8" id="preview">
-      <div className="mx-auto w-full max-w-7xl rounded-3xl border border-sky-200/18 bg-[#050d1a]/90 p-6 shadow-[0_24px_70px_rgba(56,189,248,0.18)] backdrop-blur-2xl sm:p-10">
+      <div className="mx-auto w-full max-w-7xl rounded-3xl border border-white/15 bg-[#050d1a]/90 p-6 backdrop-blur-2xl sm:p-10">
         <div className="mb-6 flex items-center justify-between gap-4">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-sky-200/90">
@@ -24,7 +24,7 @@ export function LivePreview() {
           </span>
         </div>
 
-        <div className="relative h-[380px] overflow-hidden rounded-2xl border border-sky-200/18 bg-[#030913]">
+        <div className="relative h-[380px] overflow-hidden rounded-2xl border border-white/15 bg-[#030913]">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100">
             <defs>
               <linearGradient id="flow" x1="0" y1="0" x2="1" y2="1">
@@ -45,7 +45,7 @@ export function LivePreview() {
           {infraNodes.map((node) => (
             <div
               key={node.name}
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-xl border border-cyan-200/35 bg-cyan-400/10 px-3 py-2 text-xs font-medium text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.35)] backdrop-blur-md"
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-xs font-medium text-white backdrop-blur-md"
               style={{
                 left: `${node.x}%`,
                 top: `${node.y}%`,

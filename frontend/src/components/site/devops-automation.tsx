@@ -26,7 +26,7 @@ const capabilities = [
 export function DevopsAutomation() {
   return (
     <section className="px-4 py-18 sm:px-6 lg:px-8" id="devops-automation">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-8 rounded-3xl border border-sky-200/20 bg-[#040b1a]/90 p-6 shadow-[0_24px_70px_rgba(56,189,248,0.12)] backdrop-blur-2xl lg:grid-cols-[1.1fr_0.9fr] lg:p-10">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-8 rounded-3xl border border-white/15 bg-[#040b1a]/90 p-6 backdrop-blur-2xl lg:grid-cols-[1.1fr_0.9fr] lg:p-10">
         <div>
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300/90">
             AI for DevOps and Automation
@@ -65,13 +65,12 @@ export function DevopsAutomation() {
         </div>
 
         <motion.div
-          className="relative overflow-hidden rounded-3xl border border-sky-200/20 bg-[#060f23] p-4"
+          className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#060f23] p-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55 }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.22),transparent_38%),radial-gradient(circle_at_78%_70%,rgba(34,211,238,0.2),transparent_34%)]" />
           <svg viewBox="0 0 540 380" className="relative h-full w-full" fill="none">
             <defs>
               <linearGradient id="laneA" x1="80" y1="90" x2="460" y2="280">
@@ -85,11 +84,7 @@ export function DevopsAutomation() {
                 <stop offset="100%" stopColor="#818cf8" stopOpacity="0.45" />
               </linearGradient>
               <filter id="glow">
-                <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-                <feMerge>
-                  <feMergeNode in="coloredBlur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
               </filter>
             </defs>
 
