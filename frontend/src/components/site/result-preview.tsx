@@ -14,14 +14,14 @@ export function ResultPreview() {
           <p className="mt-3 text-slate-300">
             Empty state optimized for first-run activation and onboarding.
           </p>
-          <div className="mt-6 h-64 rounded-2xl border border-dashed border-cyan-300/30 bg-[#0e172d] p-6">
+          <div className="mt-6 h-64 rounded-2xl border border-dashed border-white/20 bg-[#0a0a0a] p-6">
             <motion.div
-              className="relative grid h-full place-items-center overflow-hidden rounded-xl border border-white/10 bg-[#0a1224]"
-              animate={{ boxShadow: ["0 0 0 rgba(34,211,238,0)", "0 0 34px rgba(34,211,238,0.16)", "0 0 0 rgba(34,211,238,0)"] }}
+              className="relative grid h-full place-items-center overflow-hidden rounded-xl border border-white/10 bg-[#000000]"
+              animate={{ boxShadow: ["0 0 0 rgba(0,0,0,0)", "0 0 34px rgba(0,0,0,0.16)", "0 0 0 rgba(0,0,0,0)"] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
             >
               <motion.span
-                className="absolute inset-y-0 -left-16 w-16 bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent"
+                className="absolute inset-y-0 -left-16 w-16 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={{ x: [0, 420] }}
                 transition={{ duration: 3.2, repeat: Infinity, ease: "linear" }}
               />
@@ -34,7 +34,7 @@ export function ResultPreview() {
             </motion.div>
           </div>
         </div>
-        <aside className="rounded-2xl border border-white/10 bg-[#0f1730] p-6">
+        <aside className="rounded-2xl border border-white/10 bg-[#0a0a0a] p-6">
           <h3 className="text-lg font-semibold text-white">Ready to analyze?</h3>
           <p className="mt-2 text-sm text-slate-300">
             Start with your Terraform or Kubernetes repo and get an instant system blueprint.
