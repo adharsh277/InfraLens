@@ -51,7 +51,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="relative h-[420px] overflow-hidden lg:-mr-20 lg:h-[580px]"
+          className="relative h-[420px] overflow-hidden lg:-mr-28 lg:h-[580px]"
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.18 }}
@@ -64,9 +64,9 @@ export function Hero() {
               priority
               className="object-cover object-center opacity-100"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-black via-black/70 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/45 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/18 via-black/8 to-black/75" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black/65 via-black/30 to-transparent" />
           </div>
         </motion.div>
       </div>
