@@ -10,7 +10,7 @@ import { Workflow } from "@/components/site/workflow";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#000000]">
+    <div className="relative min-h-screen overflow-hidden bg-[#4a4a4a]">
       <AnimatedBackground />
       <div className="relative z-10">
         <Navbar />
