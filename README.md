@@ -9,9 +9,9 @@ InfraLens is a modern SaaS platform that instantly understands your infrastructu
 - 🔍 **Infrastructure Graph Intelligence** - Visual analysis of your infrastructure components
 - 🤖 **AI-Powered Automation Detection** - Automatically identify optimization opportunities
 - ⚠️ **Risk Detection & Alerts** - Proactive security and performance analysis
-- 🎨 **Premium Dark UI** - Beautiful, animated interface with sky-blue accents
+- 🎨 **Modern Minimalist UI** - Clean, ash-silver themed interface with smooth animations
 - ⚡ **Real-time Analysis** - Fast repository analysis with background processing
-- 📊 **Interactive Visualizations** - Animated graphs and workflow previews
+- 📊 **AI Visualizations** - AI-generated infrastructure and automation visualizations
 
 ## 🏗️ Tech Stack
 
@@ -27,7 +27,16 @@ InfraLens is a modern SaaS platform that instantly understands your infrastructu
 - **Pydantic 2.11.3** - Data validation
 - **Uvicorn 0.34.1** - ASGI server
 
-## 📂 Project Structure
+## � Public Assets
+
+The frontend uses AI-generated visualization images:
+- **automationai.png** - AI automation intelligence visualization for DevOps section
+- **ai.png** - AI Intelligence Visualization for live preview section
+- **infra.png** - Infrastructure architecture preview (hero section)
+
+Located in `/frontend/public/`
+
+## �📂 Project Structure
 
 ```
 InfraLens/
@@ -117,16 +126,29 @@ Analyze a GitHub repository for infrastructure and automation opportunities.
 ## 🎨 Design System
 
 ### Color Palette
-- **Primary Background**: `#000000` (Pure Black)
-- **Primary Accent**: Sky Blue (`#7dd3fc`, `#38bdf8`)
-- **Secondary Accent**: Cyan (`#22d3ee`)
-- **Text**: `#ffffff` (White)
+- **Primary Background**: Ash Silver (`#4a4a4a`)
+- **Dark Background**: Pure Black (`#000000`, `#0a0a0a`, `#0f0f0f`)
+- **Text**: White (`#ffffff`)
+- **Gradient**: Dark gray to black with subtle depth
 
-### Animations
-- Framer Motion for component-level animations
-- CSS keyframes for continuous effects (flow, pulse, float)
-- Smooth entrance animations on scroll
-- Hover interactions for UI elements
+### Key Components
+- **Minimalist Design** - Removed blue accents, focus on clean ash-silver tones
+- **AI Visualizations** - Integrated AI-generated infrastructure maps (automationai.png, ai.png)
+- **Footer** - Comprehensive footer with social links:
+  - GitHub
+  - Twitter
+  - LinkedIn
+  - Instagram
+  - Email
+- **Animations** - Framer Motion for smooth component interactions
+- **Responsive Layout** - Mobile-first design with Tailwind CSS
+
+### Recent Design Updates
+- ✅ Removed blue-flavored box structures
+- ✅ Implemented ash-silver background color scheme
+- ✅ Added AI visualization images
+- ✅ Enhanced footer with social media links
+- ✅ Minimalist component styling
 
 ## 🔧 Building for Production
 
