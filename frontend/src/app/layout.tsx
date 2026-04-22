@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${sora.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#000000] text-white">{children}</body>
+      <body className="min-h-full bg-[#4a4a4a] text-white">{children}</body>
     </html>
   );
 }
