@@ -1,21 +1,55 @@
-from fastapi import BackgroundTasks, FastAPI, HTTPException
+"""InfraLens Backend API - Phase 2"""
 
-from app.schemas import AnalyzeRequest, AnalyzeResponse
-from app.services.repo import analyze_repository
+import logging
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.api import analyze, admin
 
-app = FastAPI(title="InfraLens API", version="0.1.0")
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# Initialize FastAPI app
+app = FastAPI(
+    title="InfraLens API",
+    version="0.2.0",
+    description="Backend API for infrastructure analysis and visualization",
+)
+
+# Add CORS middleware for frontend integration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure appropriately for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
-@app.get("/health")
+# Health check endpoint
+@app.get("/health", tags=["health"])
 def health_check() -> dict[str, str]:
+    """Simple health check endpoint."""
     return {"status": "ok"}
 
 
-@app.post("/analyze", response_model=AnalyzeResponse)
-def analyze(payload: AnalyzeRequest, background_tasks: BackgroundTasks) -> AnalyzeResponse:
-    try:
-        background_tasks.add_task(analyze_repository, str(payload.repo_url))
-    except Exception as exc:  # pragma: no cover - defensive fallback
-        raise HTTPException(status_code=500, detail="Failed to queue analysis") from exc
+# Include routers
+app.include_router(analyze.router)
+app.include_router(admin.router)
 
-    return AnalyzeResponse(status="processing")
+
+# Startup event
+@app.on_event("startup")
+def startup_event() -> None:
+    """Log startup information."""
+    logger.info("InfraLens API started")
+
+
+# Shutdown event
+@app.on_event("shutdown")
+def shutdown_event() -> None:
+    """Log shutdown information."""
+    logger.info("InfraLens API shutdown")
