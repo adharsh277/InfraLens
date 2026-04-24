@@ -1,7 +1,7 @@
 """API request and response schemas."""
 
 from pydantic import BaseModel, Field, HttpUrl
-from typing import Optional
+from typing import Optional, Dict, Any, List
 
 
 class AnalyzeRequest(BaseModel):
@@ -44,6 +44,7 @@ class JobStatusResponse(BaseModel):
     error: Optional[str] = None
     created_at: str
     completed_at: Optional[str] = None
+    analysis: Optional[Dict[str, Any]] = None
 
     class Config:
         json_schema_extra = {
@@ -55,6 +56,14 @@ class JobStatusResponse(BaseModel):
                 "error": None,
                 "created_at": "2026-04-23T12:00:00",
                 "completed_at": "2026-04-23T12:05:00",
+                "analysis": {
+                    "success": True,
+                    "main_language": "Python",
+                    "languages": {"python": 150, "javascript": 45},
+                    "file_count": 195,
+                    "important_files": [],
+                    "architecture_insights": [],
+                }
             }
         }
 
