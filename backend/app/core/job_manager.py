@@ -1,7 +1,7 @@
 """In-memory job manager for tracking analysis tasks."""
 
 import uuid
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
@@ -17,6 +17,7 @@ class Job:
     error: Optional[str] = None
     created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
     completed_at: Optional[str] = None
+    analysis: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -48,6 +49,7 @@ class JobManager:
         status: str,
         path: Optional[str] = None,
         error: Optional[str] = None,
+        analysis: Optional[Dict[str, Any]] = None,
     ) -> None:
         """Update job status and metadata."""
         if job := self._jobs.get(job_id):
@@ -56,6 +58,8 @@ class JobManager:
                 job.path = path
             if error:
                 job.error = error
+            if analysis:
+                job.analysis = analysis
             if status in ("completed", "failed"):
                 job.completed_at = datetime.utcnow().isoformat()
 
