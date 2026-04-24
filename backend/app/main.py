@@ -19,11 +19,12 @@ app = FastAPI(
     description="Backend API for infrastructure analysis and visualization",
 )
 
-# Add CORS middleware for frontend integration
+# Add CORS middleware FIRST (before routes) for frontend integration
+# Allow all origins for now - can be restricted later
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,  # Set to False when using allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
