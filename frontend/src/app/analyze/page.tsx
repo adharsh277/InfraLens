@@ -8,8 +8,6 @@ import { ArrowRight, GitBranch, LoaderCircle } from "lucide-react";
 import { Navbar } from "@/components/site/navbar";
 import { Button } from "@/components/ui/button";
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
-
 export default function AnalyzePage() {
   const router = useRouter();
   const [repo, setRepo] = useState("https://github.com/user/repo");
@@ -21,7 +19,8 @@ export default function AnalyzePage() {
     setError(null);
 
     try {
-      const response = await fetch(`${apiBaseUrl}/analyze`, {
+      // Call Next.js proxy instead of backend directly
+      const response = await fetch("/api/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,10 +29,23 @@ export default function AnalyzePage() {
       });
 
       if (!response.ok) {
-        throw new Error("Unable to start analysis. Check backend service.");
+        const errorData = await response.json();
+        console.error("❌ API error:", errorData);
+        throw new Error(`API error: ${response.status}`);
       }
 
-      router.push("/result");
+      const data = await response.json();
+      console.log("✅ Analysis job created:", data);
+      
+      if (!data.job_id) {
+        throw new Error("No job_id returned from backend");
+      }
+
+      console.log("🔄 Navigating to result with job_id:", data.job_id);
+      
+      // Pass job_id to result page
+      router.push(`/result?job_id=${data.job_id}`);
+      console.log("✅ Navigation requested");
     } catch (requestError) {
       setError(
         requestError instanceof Error
