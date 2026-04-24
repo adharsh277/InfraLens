@@ -3,6 +3,7 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from app.core.job_manager import job_manager
 from app.services.repo_service import clone_repo, validate_github_url
+from app.services.analyzer import analyze_repository
 from app.models.schemas import AnalyzeRequest, JobResponse, JobStatusResponse
 import logging
 
@@ -20,7 +21,18 @@ def process_repo_background(job_id: str, repo_url: str) -> None:
     """
     try:
         path = clone_repo(repo_url, job_id)
-        job_manager.update_job(job_id, "completed", path=path)
+        logger.info(f"Repository cloned to {path}")
+        
+        # Analyze the repository
+        analysis = analyze_repository(path)
+        logger.info(f"Analysis complete for {job_id}")
+        
+        job_manager.update_job(
+            job_id, 
+            "completed", 
+            path=path,
+            analysis=analysis
+        )
         logger.info(f"Job {job_id} completed successfully")
     except Exception as e:
         error_msg = str(e)
@@ -94,4 +106,5 @@ def get_status(job_id: str) -> JobStatusResponse:
         error=job.error,
         created_at=job.created_at,
         completed_at=job.completed_at,
+        analysis=job.analysis,
     )
