@@ -63,6 +63,20 @@ class JobStatusResponse(BaseModel):
                     "file_count": 195,
                     "important_files": [],
                     "architecture_insights": [],
+                    "infrastructure": {
+                        "terraform": [
+                            {"type": "aws_instance", "name": "web", "file": "main.tf"},
+                            {"type": "aws_db_instance", "name": "db", "file": "main.tf"}
+                        ],
+                        "kubernetes": [
+                            {"type": "Deployment", "name": "api", "file": "deploy.yaml", "namespace": "default"},
+                            {"type": "Service", "name": "api-svc", "file": "deploy.yaml", "namespace": "default"}
+                        ],
+                        "docker": [
+                            {"type": "Dockerfile", "name": "Dockerfile", "file": "Dockerfile", "base_image": "python:3.11"}
+                        ],
+                        "total": 5
+                    }
                 }
             }
         }
