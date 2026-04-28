@@ -27,6 +27,31 @@ interface JobStatus {
     }>;
     readme_preview?: string;
     architecture_insights?: string[];
+    infrastructure?: {
+      terraform?: Array<{
+        type: string;
+        name: string;
+        file: string;
+        config?: Record<string, any>;
+      }>;
+      kubernetes?: Array<{
+        type: string;
+        name: string;
+        file: string;
+        namespace?: string;
+        labels?: Record<string, string>;
+      }>;
+      docker?: Array<{
+        type: string;
+        name: string;
+        file: string;
+        base_image?: string;
+        stages?: number;
+        image?: string;
+        ports?: string[];
+      }>;
+      total?: number;
+    };
   };
 }
 
@@ -291,6 +316,87 @@ export function ResultContent() {
                 {jobStatus.analysis.readme_preview}
                 {(jobStatus.analysis.readme_preview?.length || 0) > 500 && "...\n[truncated]"}
               </pre>
+            </div>
+          </div>
+        )}
+
+        {/* Infrastructure Resources */}
+        {jobStatus.analysis?.infrastructure && jobStatus.analysis.infrastructure.total > 0 && (
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <h2 className="text-2xl font-semibold text-white">🏗️ Infrastructure as Code</h2>
+            <p className="mt-1 text-slate-300 text-sm">Found {jobStatus.analysis.infrastructure.total} infrastructure resources</p>
+            
+            <div className="mt-6 grid gap-6">
+              {/* Terraform Resources */}
+              {jobStatus.analysis.infrastructure.terraform && 
+               jobStatus.analysis.infrastructure.terraform.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-cyan-300 mb-3">📦 Terraform Resources ({jobStatus.analysis.infrastructure.terraform.length})</h3>
+                  <div className="space-y-2">
+                    {jobStatus.analysis.infrastructure.terraform.map((resource, idx) => (
+                      <div key={idx} className="flex items-center justify-between rounded-lg border border-cyan-500/30 bg-cyan-500/10 p-3">
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-mono bg-cyan-600/30 text-cyan-300 px-2 py-1 rounded">{resource.type}</span>
+                          <span className="text-slate-200 font-medium">{resource.name}</span>
+                        </div>
+                        <span className="text-xs text-slate-400">{resource.file}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Kubernetes Resources */}
+              {jobStatus.analysis.infrastructure.kubernetes && 
+               jobStatus.analysis.infrastructure.kubernetes.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-300 mb-3">☸️ Kubernetes Resources ({jobStatus.analysis.infrastructure.kubernetes.length})</h3>
+                  <div className="space-y-2">
+                    {jobStatus.analysis.infrastructure.kubernetes.map((resource, idx) => (
+                      <div key={idx} className="flex items-center justify-between rounded-lg border border-blue-500/30 bg-blue-500/10 p-3">
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-mono bg-blue-600/30 text-blue-300 px-2 py-1 rounded">{resource.type}</span>
+                          <span className="text-slate-200 font-medium">{resource.name}</span>
+                          {resource.namespace && resource.namespace !== "default" && (
+                            <span className="text-xs text-slate-400">ns/{resource.namespace}</span>
+                          )}
+                        </div>
+                        <span className="text-xs text-slate-400">{resource.file}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Docker Resources */}
+              {jobStatus.analysis.infrastructure.docker && 
+               jobStatus.analysis.infrastructure.docker.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-orange-300 mb-3">🐳 Docker ({jobStatus.analysis.infrastructure.docker.length})</h3>
+                  <div className="space-y-2">
+                    {jobStatus.analysis.infrastructure.docker.map((resource, idx) => (
+                      <div key={idx} className="rounded-lg border border-orange-500/30 bg-orange-500/10 p-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <span className="text-xs font-mono bg-orange-600/30 text-orange-300 px-2 py-1 rounded">{resource.type}</span>
+                            <span className="text-slate-200 font-medium">{resource.name}</span>
+                          </div>
+                          <span className="text-xs text-slate-400">{resource.file}</span>
+                        </div>
+                        {resource.base_image && (
+                          <p className="text-xs text-slate-400 ml-12">Base: {resource.base_image}</p>
+                        )}
+                        {resource.image && (
+                          <p className="text-xs text-slate-400 ml-12">Image: {resource.image}</p>
+                        )}
+                        {resource.ports && resource.ports.length > 0 && (
+                          <p className="text-xs text-slate-400 ml-12">Ports: {resource.ports.join(", ")}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
