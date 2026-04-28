@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from collections import defaultdict, Counter
 from typing import Optional
+from app.services.parser import parse_infrastructure
 
 # Language file extensions mapping
 LANGUAGE_EXTENSIONS = {
@@ -83,6 +84,9 @@ class RepositoryAnalyzer:
             self._read_readme()
             self._generate_insights()
             
+            # Parse infrastructure files
+            infrastructure = parse_infrastructure(str(self.repo_path))
+            
             return {
                 "success": True,
                 "languages": dict(self.languages.most_common()),
@@ -92,6 +96,7 @@ class RepositoryAnalyzer:
                 "important_files": self.important_files,
                 "readme_preview": self.readme_content[:500] if self.readme_content else None,
                 "architecture_insights": self.architecture_insights,
+                "infrastructure": infrastructure,
             }
         except Exception as e:
             return self._error_response(f"Analysis failed: {str(e)}")
