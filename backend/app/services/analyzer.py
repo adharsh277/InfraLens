@@ -6,6 +6,7 @@ from pathlib import Path
 from collections import defaultdict, Counter
 from typing import Optional
 from app.services.parser import parse_infrastructure
+from app.services.graph_builder import build_infrastructure_graph
 
 # Language file extensions mapping
 LANGUAGE_EXTENSIONS = {
@@ -86,6 +87,8 @@ class RepositoryAnalyzer:
             
             # Parse infrastructure files
             infrastructure = parse_infrastructure(str(self.repo_path))
+            # Build infrastructure graph
+            graph = build_infrastructure_graph(infrastructure)
             
             return {
                 "success": True,
@@ -96,6 +99,8 @@ class RepositoryAnalyzer:
                 "important_files": self.important_files,
                 "readme_preview": self.readme_content[:500] if self.readme_content else None,
                 "architecture_insights": self.architecture_insights,
+                "infrastructure": infrastructure,
+                "graph": graphchitecture_insights,
                 "infrastructure": infrastructure,
             }
         except Exception as e:
