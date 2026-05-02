@@ -4,7 +4,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from app.core.job_manager import job_manager
 from app.services.repo_service import clone_repo, validate_github_url
 from app.services.analyzer import analyze_repository
-from app.models.schemas import AnalyzeRequest, JobResponse, JobStatusResponse
+from app.models.schemas import AnalyzeRequest, JobResponse, JobStatusResponse, GraphResponse
 import logging
 
 logger = logging.getLogger(__name__)
@@ -107,4 +107,49 @@ def get_status(job_id: str) -> JobStatusResponse:
         created_at=job.created_at,
         completed_at=job.completed_at,
         analysis=job.analysis,
+    )
+
+
+@router.get("/graph/{job_id}", response_model=GraphResponse)
+def get_graph(job_id: str) -> GraphResponse:
+    """Get infrastructure graph for completed analysis job.
+    
+    Args:
+        job_id: Unique job identifier
+        
+    Returns:
+        GraphResponse with nodes and edges
+        
+    Raises:
+        HTTPException: If job not found, not completed, or no graph data
+    """
+    job = job_manager.get_job(job_id)
+    
+    if not job:
+        logger.warning(f"Job not found: {job_id}")
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found")
+    
+    if job.status != "completed":
+        logger.warning(f"Job {job_id} not completed: status={job.status}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Job not completed. Current status: {job.status}"
+        )
+    
+    if not job.analysis or "graph" not in job.analysis:
+        logger.warning(f"No graph data for job {job_id}")
+        raise HTTPException(
+            status_code=404,
+            detail="No graph data found for this analysis"
+        )
+    
+    graph_data = job.analysis["graph"]
+    
+    # Convert dict to GraphResponse
+    return GraphResponse(
+        nodes=graph_data.get("nodes", []),
+        edges=graph_data.get("edges", []),
+        total_nodes=graph_data.get("total_nodes", 0),
+        total_edges=graph_data.get("total_edges", 0),
+        error=graph_data.get("error")
     )
