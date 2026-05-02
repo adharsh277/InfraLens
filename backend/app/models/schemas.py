@@ -82,6 +82,102 @@ class JobStatusResponse(BaseModel):
         }
 
 
+class NodeMetadata(BaseModel):
+    """Metadata for a graph node."""
+
+    full_type: Optional[str] = None
+    resource_name: Optional[str] = None
+    kind: Optional[str] = None
+    namespace: Optional[str] = None
+    labels: Optional[Dict[str, Any]] = None
+    base_image: Optional[str] = None
+    services: Optional[List[str]] = None
+
+
+class Node(BaseModel):
+    """Infrastructure graph node."""
+
+    id: str = Field(..., description="Unique node identifier")
+    label: str = Field(..., description="Display label")
+    type: str = Field(..., description="Resource type (e.g., aws_instance, Deployment)")
+    category: str = Field(..., description="Resource category: terraform, kubernetes, or docker")
+    icon: str = Field(..., description="Emoji icon for display")
+    file: str = Field(..., description="Source file path")
+    metadata: Dict[str, Any] = Field(..., description="Additional resource metadata")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "id": "tf-aws_instance-web",
+                "label": "web",
+                "type": "aws_instance",
+                "category": "terraform",
+                "icon": "📦",
+                "file": "main.tf",
+                "metadata": {
+                    "full_type": "aws_instance",
+                    "resource_name": "web"
+                }
+            }
+        }
+
+
+class Edge(BaseModel):
+    """Infrastructure graph edge (relationship)."""
+
+    source: str = Field(..., description="Source node ID")
+    target: str = Field(..., description="Target node ID")
+    type: str = Field(..., description="Relationship type (e.g., connects_to, exposes)")
+    label: str = Field(..., description="Display label for relationship")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "source": "tf-aws_instance-web",
+                "target": "tf-aws_db_instance-db",
+                "type": "connects_to",
+                "label": "Connects To"
+            }
+        }
+
+
+class GraphResponse(BaseModel):
+    """Infrastructure relationship graph."""
+
+    nodes: List[Node] = Field(..., description="List of infrastructure nodes")
+    edges: List[Edge] = Field(..., description="List of relationships between nodes")
+    total_nodes: int = Field(..., description="Total number of nodes")
+    total_edges: int = Field(..., description="Total number of edges")
+    error: Optional[str] = None
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "nodes": [
+                    {
+                        "id": "tf-aws_instance-web",
+                        "label": "web",
+                        "type": "aws_instance",
+                        "category": "terraform",
+                        "icon": "📦",
+                        "file": "main.tf",
+                        "metadata": {}
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": "tf-aws_instance-web",
+                        "target": "tf-aws_db_instance-db",
+                        "type": "connects_to",
+                        "label": "Connects To"
+                    }
+                ],
+                "total_nodes": 1,
+                "total_edges": 1
+            }
+        }
+
+
 class ErrorResponse(BaseModel):
     """Generic error response."""
 
